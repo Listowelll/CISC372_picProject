@@ -1,0 +1,18 @@
+Script started on Thu Oct 30 18:18:18 2025
+]0;animlist@r1n45.darwin:~/CISC372_picProject[?1034h[animlist@r1n45 CISC372_picProject]$ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ echo "--- Running pthreads version ---"
+--- Running pthreads version ---
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ srun ./image_pthread pic1.jpg edge
+Took 7 seconds
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ mv output.png output_pthread.png
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ echo "--- Running OpenMP version ---"
+--- Running OpenMP version ---
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ srun ./image_openmp pic1.jpg edge
+Took 7 seconds
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ mv output.png output_openmp.png
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ echo "--- Done ---"
+--- Done ---
+]0;animlist@r1n45.darwin:~/CISC372_picProject[animlist@r1n45 CISC372_picProject]$ exit
+exit
+
+Script done on Thu Oct 30 18:21:00 2025

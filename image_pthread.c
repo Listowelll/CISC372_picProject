@@ -28,7 +28,7 @@ typedef struct {
     int end_row;
     Image* srcImage;
     Image* destImage;
-    Matrix* algorithm;
+    Matrix algorithm;
 } ThreadData;
 
 
@@ -64,7 +64,7 @@ void* convolute_thread(void* arg) {
         for (pix = 0; pix < data->srcImage->width; pix++) {
             for (bit = 0; bit < data->srcImage->bpp; bit++) {
                 data->destImage->data[Index(pix, row, data->srcImage->width, bit, data->srcImage->bpp)] =
-                    getPixelValue(data->srcImage, pix, row, bit, *data->algorithm);
+                    getPixelValue(data->srcImage, pix, row, bit, data->algorithm);
             }
         }
     }
@@ -83,7 +83,7 @@ void convolute(Image* srcImage,Image* destImage,Matrix algorithm){
         thread_data[i].end_row = (i == NUM_THREADS - 1) ? srcImage->height : (i + 1) * rows_per_thread; // Last thread handles any remainder
         thread_data[i].srcImage = srcImage;
         thread_data[i].destImage = destImage;
-        thread_data[i].algorithm = &algorithm;
+        memcpy(thread_data[i].algorithm, algorithm, sizeof(Matrix));
         
         pthread_create(&threads[i], NULL, convolute_thread, &thread_data[i]);
     }
